@@ -22,6 +22,7 @@ public class ChildUserWebservice {
     }
 
     //update the child will be used to update any of the attributes
+    //http://localhost:8080/api/child/update?childId=3
     @PostMapping(path = "/update")
     public @ResponseBody
     ChildUser updateChildUser(@RequestBody ChildUser childUser, @RequestParam String childId){

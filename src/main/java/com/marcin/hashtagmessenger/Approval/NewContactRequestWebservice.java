@@ -16,6 +16,7 @@ public class NewContactRequestWebservice {
     NewContactRequestService newContactRequestService;
 
     //get all requests for a child with child ID childId
+    //http://localhost:8080/api/rqst/read?childId=3
     @GetMapping(path = "/read")
     public @ResponseBody
     List<NewContactRequest> read(@RequestParam String childId){
@@ -32,6 +33,7 @@ public class NewContactRequestWebservice {
     }
 
     //approves the request with the request id
+    //http://localhost:8080/api/rqst/approve?rqstId=5
     @GetMapping(path="/approve")
     public @ResponseBody NewContactRequest approve(@RequestParam String rqstId){
         Long id = Long.parseLong(rqstId);

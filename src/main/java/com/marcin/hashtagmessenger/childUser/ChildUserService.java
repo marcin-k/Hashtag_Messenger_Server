@@ -22,7 +22,15 @@ public class ChildUserService {
 
     public ChildUser update(ChildUser childUser, Long childId){
         ChildUser child = childUserRepository.findById(childId).get();
-        child = childUser;
+        child.setCanAddNewContacts(childUser.isCanAddNewContacts());
+        //Todo: decide if parent can update those attributes
+//        child.setFirstName(childUser.getFirstName());
+//        child.setLastName(childUser.getLastName());
+//        child.setUserName(childUser.getUserName());
+
+
+        child.setCanBeFound(childUser.isCanBeFound());
+        child.setCanReceiveMessageFromNonConctact(childUser.isCanReceiveMessageFromNonConctact());
         return childUserRepository.save(child);
     }
 }
