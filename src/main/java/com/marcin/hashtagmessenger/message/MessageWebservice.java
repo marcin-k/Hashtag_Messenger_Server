@@ -22,7 +22,7 @@ public class MessageWebservice {
         return messageService.createMessage(msg);
     }
 
-    //to get all messages for a given ID
+    //to get all messages for a user with a given ID
     //http://localhost:8080/api/msg/read?userId=2 where 2 is the id
     @GetMapping(path = "/read")
     public @ResponseBody List<Message> read(@RequestParam String userId){

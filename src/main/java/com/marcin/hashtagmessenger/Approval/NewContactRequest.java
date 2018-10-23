@@ -4,7 +4,7 @@ import com.marcin.hashtagmessenger.core.BaseEntity;
 import lombok.Data;
 
 import javax.persistence.Entity;
-import java.util.Date;
+import java.time.LocalDate;
 
 @Entity
 @Data
@@ -21,11 +21,11 @@ public class NewContactRequest extends BaseEntity {
     // approval for adding contact (set automatically to true if canAddNewContacts is set to true)
     private boolean canAddNewContactRequester;
     // time stamp of that approval (set to request date if canAddNewContact is set to true)
-    private Date requesterApprovalTimeStamp;
+    private LocalDate requesterApprovalTimeStamp;
     // approval for contact to be added (set automatically to true if canBeFound is se to true)
     private boolean canBeAdded;
     // time stamp of the approval (set to request date if canBeFound is set to true)
-    private Date newContactApprovalTimeStamp;
+    private LocalDate newContactApprovalTimeStamp;
 
 //-----------------------Constructor------------------------------------------------------------------------------------
     //invokes the parent constructor

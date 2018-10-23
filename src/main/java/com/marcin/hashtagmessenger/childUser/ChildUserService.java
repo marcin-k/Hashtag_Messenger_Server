@@ -19,4 +19,10 @@ public class ChildUserService {
         parentUser.addNewChild(childUser);
         return childUserRepository.save(childUser);
     }
+
+    public ChildUser update(ChildUser childUser, Long childId){
+        ChildUser child = childUserRepository.findById(childId).get();
+        child = childUser;
+        return childUserRepository.save(child);
+    }
 }

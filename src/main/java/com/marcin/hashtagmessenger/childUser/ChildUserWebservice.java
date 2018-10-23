@@ -21,5 +21,13 @@ public class ChildUserWebservice {
         return childUserService.createChildUser(childUser, id);
     }
 
+    //update the child will be used to update any of the attributes
+    @PostMapping(path = "/update")
+    public @ResponseBody
+    ChildUser updateChildUser(@RequestBody ChildUser childUser, @RequestParam String childId){
+        Long id = Long.parseLong(childId);
+        return childUserService.update(childUser, id);
+    }
+
 
 }

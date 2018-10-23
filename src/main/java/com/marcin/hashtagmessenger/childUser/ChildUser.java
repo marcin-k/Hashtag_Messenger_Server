@@ -6,6 +6,7 @@ import com.marcin.hashtagmessenger.core.BaseUser;
 import com.marcin.hashtagmessenger.parentUser.ParentUser;
 import lombok.Data;
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -28,6 +29,14 @@ public class ChildUser extends BaseUser {
     private boolean canBeFound;
     //enables child to received filtered messages from strangers (users not on child contact list)
     private boolean canReceiveMessageFromNonConctact;
+
+    //adds a child for parent user
+    public void addNewRqst(NewContactRequest request) {
+        if (requests == null) {
+            requests = new ArrayList<>();
+        }
+        requests.add(request);
+    }
 
 //-----------------------Constructor------------------------------------------------------------------------------------
     protected ChildUser(){
