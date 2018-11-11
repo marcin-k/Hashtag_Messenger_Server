@@ -1,16 +1,22 @@
 package com.marcin.hashtagmessenger.Approval;
 
-import com.marcin.hashtagmessenger.core.BaseEntity;
 import lombok.Data;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.time.LocalDate;
 
 @Entity
 @Data
-public class NewContactRequest extends BaseEntity {
+public class NewContactRequest {
 
 //-----------------------Class Variables--------------------------------------------------------------------------------
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private final Long id;
+
     // child who request a new contact
     private Long childRequestingNewContactId;
     // contact to be added
@@ -30,7 +36,7 @@ public class NewContactRequest extends BaseEntity {
 //-----------------------Constructor------------------------------------------------------------------------------------
     //invokes the parent constructor
     protected NewContactRequest(){
-        super();
+        id = null;
     }
 
 

@@ -18,11 +18,15 @@ public class MessageService {
     BaseUserRepository baseUserRepository;
 
     public Message createMessage(Message msg){
+        Message m = messageRepository.save(msg);
+        System.out.println(m.getId());
         BaseUser user = baseUserRepository.findById(msg.getSenderId()).get();
-        user.addNewMessage(msg);
+        user.addNewMessage(m);
         BaseUser recipient = baseUserRepository.findById(msg.getRecipientId()).get();
-        recipient.addNewMessage(msg);
-        return messageRepository.save(msg);
+        recipient.addNewMessage(m);
+        baseUserRepository.save(user);
+        baseUserRepository.save(recipient);
+        return m;
     }
 
     public List<Message> read(Long id){

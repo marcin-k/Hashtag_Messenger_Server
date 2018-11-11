@@ -1,14 +1,20 @@
 package com.marcin.hashtagmessenger.message;
 
-import com.marcin.hashtagmessenger.core.BaseEntity;
 import lombok.Data;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 @Data
 @Entity
-public class Message extends BaseEntity {
+public class Message{
 
 //-----------------------Class Variables--------------------------------------------------------------------------------
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private final Long id;
+
     private Long senderId;
     private Long recipientId;
     private String body;
@@ -22,6 +28,6 @@ public class Message extends BaseEntity {
 
 //-----------------------Constructor------------------------------------------------------------------------------------
     protected Message(){
-        super();
+        id = null;
     }
 }

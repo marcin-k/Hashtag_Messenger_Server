@@ -20,12 +20,16 @@ import java.util.List;
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "UserType")
-public class BaseUser extends BaseEntity {
+public class BaseUser  {
 
 //-----------------------Class Variables--------------------------------------------------------------------------------
     private String userName;
     private String firstName;
     private String lastName;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private final Long id;
 
     @ManyToMany
     private List<BaseUser> contacts;
@@ -52,7 +56,8 @@ public class BaseUser extends BaseEntity {
 
 //-----------------------Constructor------------------------------------------------------------------------------------
     protected BaseUser(){
-        super();
+//        super();
+        id = null;
     }
 
     public BaseUser(String userName, String firstName, String lastName, String password) {
