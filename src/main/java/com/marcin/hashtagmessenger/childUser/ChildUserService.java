@@ -28,9 +28,19 @@ public class ChildUserService {
 //        child.setLastName(childUser.getLastName());
 //        child.setUserName(childUser.getUserName());
 
-
         child.setCanBeFound(childUser.isCanBeFound());
         child.setCanReceiveMessageFromNonConctact(childUser.isCanReceiveMessageFromNonConctact());
+        return childUserRepository.save(child);
+    }
+
+    public int getDailyAllowance(Long id){
+        ChildUser child = childUserRepository.findById(id).get();
+        return child.getDailyAllowance();
+    }
+
+    public ChildUser setLimit(Long id, int limit){
+        ChildUser child = childUserRepository.findById(id).get();
+        child.setDailyAllowance(limit);
         return childUserRepository.save(child);
     }
 }

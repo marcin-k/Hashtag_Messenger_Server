@@ -30,5 +30,24 @@ public class ChildUserWebservice {
         return childUserService.update(childUser, id);
     }
 
+    //to get child allowance for child with id 2
+    //http://localhost:8080/api/child/getDailyAllowance?userId=2
+    @GetMapping(path = "/getDailyAllowance")
+    public @ResponseBody int read(@RequestParam String userId){
+        Long id = Long.parseLong(userId);
+        return childUserService.getDailyAllowance(id);
+    }
+
+    //sets daily limit for child with id 2
+    //http://localhost:8080/api/child/setDailyLimit?childId=2&limit=200
+    @GetMapping(path = "/setDailyLimit")
+    public @ResponseBody
+    ChildUser setLimit(@RequestParam String childId, @RequestParam String limit){
+        Long id = Long.parseLong(childId);
+        int limitInt = Integer.parseInt(limit);
+        return childUserService.setLimit(id, limitInt);
+    }
+
+
 
 }

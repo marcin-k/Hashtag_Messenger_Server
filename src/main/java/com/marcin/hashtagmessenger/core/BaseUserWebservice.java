@@ -1,5 +1,6 @@
 package com.marcin.hashtagmessenger.core;
 
+import com.marcin.hashtagmessenger.childUser.ChildUser;
 import com.marcin.hashtagmessenger.message.Message;
 import com.marcin.hashtagmessenger.message.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,5 +39,22 @@ public class BaseUserWebservice {
     List<BaseUser> read(@RequestParam String userId){
         Long id = Long.parseLong(userId);
         return baseUserService.read(id);
+    }
+
+    //sets password for a user
+    //http://localhost:8080/api/contacts/pw?userId=2&pw=testpass
+    @GetMapping(path = "/pw")
+    public @ResponseBody
+    String setPassword(@RequestParam String userId, @RequestParam String pw){
+        Long id = Long.parseLong(userId);
+        return baseUserService.setPassword(id, pw);
+    }
+
+    //checks the username and password, returns user id
+    //http://localhost:8080/api/contacts/login?username=user1&pw=user1
+    @GetMapping(path = "/login")
+    public @ResponseBody
+    Long login(@RequestParam String username, @RequestParam String pw){
+        return baseUserService.login(username, pw);
     }
 }

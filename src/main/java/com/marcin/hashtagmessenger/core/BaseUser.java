@@ -23,7 +23,7 @@ import java.util.List;
 public class BaseUser  {
 
 //-----------------------Class Variables--------------------------------------------------------------------------------
-    private String userName;
+    private String username;
     private String firstName;
     private String lastName;
 
@@ -62,7 +62,7 @@ public class BaseUser  {
 
     public BaseUser(String userName, String firstName, String lastName, String password) {
         this();
-        this.userName = userName;
+        this.username = userName;
         this.firstName = firstName;
         this.lastName = lastName;
         this.password = password;

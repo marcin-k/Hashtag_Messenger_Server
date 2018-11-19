@@ -20,8 +20,8 @@ public class ParentUserWebservice {
     //http://localhost:8080/api/parent/new
     @PostMapping(path = "/new")
     public @ResponseBody
-    ParentUser newParentUser(@RequestBody ParentUser parentUser){
-        return parentUserService.createParentUser(parentUser);
+    Long newParentUser(@RequestBody ParentUser parentUser){
+        return parentUserService.createParentUser(parentUser).getId();
     }
 
     //to get all children of a parent with a given ID

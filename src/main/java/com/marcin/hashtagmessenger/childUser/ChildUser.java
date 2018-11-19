@@ -29,6 +29,8 @@ public class ChildUser extends BaseUser {
     private boolean canBeFound;
     //enables child to received filtered messages from strangers (users not on child contact list)
     private boolean canReceiveMessageFromNonConctact;
+    //daily allowance in minutes
+    private int dailyAllowance;
 
     //adds a child for parent user
     public void addNewRqst(NewContactRequest request) {

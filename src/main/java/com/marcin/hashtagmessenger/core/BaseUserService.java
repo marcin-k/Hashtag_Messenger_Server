@@ -28,4 +28,21 @@ public class BaseUserService {
         }
         return new ArrayList<>();
     }
+
+    //returns password set or password not set if user not found
+    public String setPassword(Long id, String password){
+        BaseUser bs = baseUserRepository.findById(id).get();
+        bs.setPassword(password);
+        baseUserRepository.save(bs);
+        return "password set";
+    }
+
+    //return an id of user if username and password are correct
+    public Long login(String username, String password){
+        BaseUser bs = baseUserRepository.findByUsername(username);
+        if (bs.getPassword().equals(password)){
+            return bs.getId();
+        }
+        return 0l;
+    }
 }
