@@ -20,7 +20,7 @@ public class BaseUserWebservice {
     //http://localhost:8080/api/contacts/new?contactId=2&userId=1
     @GetMapping(path = "/new")
     public @ResponseBody
-    BaseUser newMsg(@RequestParam String contactId, @RequestParam String userId){
+    String newMsg(@RequestParam String contactId, @RequestParam String userId){
         Long idContact = Long.parseLong(contactId);
         Long idUser = Long.parseLong(userId);
         //if its the same id
@@ -56,5 +56,13 @@ public class BaseUserWebservice {
     public @ResponseBody
     Long login(@RequestParam String username, @RequestParam String pw){
         return baseUserService.login(username, pw);
+    }
+
+    //returns list of users matching the criteria
+    //http://localhost:8080/api/contacts/search?username=user1
+    @GetMapping(path = "/search")
+    public @ResponseBody
+    List<BaseUser> login(@RequestParam String username){
+        return baseUserService.search(username);
     }
 }

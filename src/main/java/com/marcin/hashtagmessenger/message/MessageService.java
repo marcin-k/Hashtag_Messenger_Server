@@ -1,5 +1,7 @@
 package com.marcin.hashtagmessenger.message;
 
+import com.marcin.hashtagmessenger.pythonServerConnection.Connector;
+import com.marcin.hashtagmessenger.badWordsDictionary.Dictionary;
 import com.marcin.hashtagmessenger.core.BaseUser;
 import com.marcin.hashtagmessenger.core.BaseUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,10 @@ public class MessageService {
 
     public Message createMessage(Message msg){
         Message m = messageRepository.save(msg);
+        //updates message
+        m.setApprovedForChild(checkMessage(msg.getBody()));
+        messageRepository.save(m);
+
         System.out.println(m.getId());
         BaseUser user = baseUserRepository.findById(msg.getSenderId()).get();
         user.addNewMessage(m);
@@ -37,4 +43,19 @@ public class MessageService {
         return new ArrayList<>();
     }
 
+    //checks message content return true if appropriate for children
+    private boolean checkMessage(String word){
+        String[] splited = word.split("\\s+");
+        for (String s : splited){
+            String reply = "";
+            reply = Connector.getInstance().checkWord(s);
+            if (reply.equals("bad")){
+                return false;
+            }
+            if (Dictionary.getInstance().checkWordIsBad(s)){
+                return false;
+            }
+        }
+        return true;
+    }
 }

@@ -14,23 +14,34 @@ public class ChildUserService {
     @Autowired
     ParentUserRepository parentUserRepository;
 
-    public ChildUser createChildUser(ChildUser childUser, Long parentId){
+    public Long createChildUser(ChildUser childUser, Long parentId){
+        ChildUser c = childUserRepository.save(childUser);
         ParentUser parentUser = parentUserRepository.findById(parentId).get();
-        parentUser.addNewChild(childUser);
-        return childUserRepository.save(childUser);
+        parentUser.addNewChild(c);
+        parentUserRepository.save(parentUser);
+        addParent(c.getId(), parentId);
+        return c.getId();
     }
 
-    public ChildUser update(ChildUser childUser, Long childId){
+    public ChildUser addParent(Long childId, Long parentId){
+        ChildUser c = childUserRepository.findById(childId).get();
+        c.addNewParent(parentUserRepository.findById(parentId).get());
+        return childUserRepository.save(c);
+    }
+
+
+    public String update(ChildUser childUser, Long childId){
         ChildUser child = childUserRepository.findById(childId).get();
         child.setCanAddNewContacts(childUser.isCanAddNewContacts());
-        //Todo: decide if parent can update those attributes
+        //Those are excluded from possibility of being updated
 //        child.setFirstName(childUser.getFirstName());
 //        child.setLastName(childUser.getLastName());
 //        child.setUserName(childUser.getUserName());
-
         child.setCanBeFound(childUser.isCanBeFound());
         child.setCanReceiveMessageFromNonConctact(childUser.isCanReceiveMessageFromNonConctact());
-        return childUserRepository.save(child);
+        child.setDailyAllowance(childUser.getDailyAllowance());
+        childUserRepository.save(child);
+        return "updated";
     }
 
     public int getDailyAllowance(Long id){
@@ -42,5 +53,9 @@ public class ChildUserService {
         ChildUser child = childUserRepository.findById(id).get();
         child.setDailyAllowance(limit);
         return childUserRepository.save(child);
+    }
+
+    public ChildUser getChild(Long id){
+        return childUserRepository.findById(id).get();
     }
 }

@@ -1,45 +1,48 @@
-package com.marcin.hashtagmessenger.PythonServerConnection;
+package com.marcin.hashtagmessenger.pythonServerConnection;
 
-import java.io.*;
-import java.net.*;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.net.Socket;
 
-public class _tempFile_ {
+public class Connector {
+    private static Connector ourInstance = new Connector();
 
-    private String testWord(String word){
+    public static Connector getInstance() {
+        return ourInstance;
+    }
+
+    private Connector() {
+    }
+
+
+
+    public String checkWord(String word){
 
         String strToReturn = "";
 
         try{
             Socket socket=new Socket("localhost",2004);
-
             DataOutputStream dout=new DataOutputStream(socket.getOutputStream());
             DataInputStream din=new DataInputStream(socket.getInputStream());
-
-
-            dout.writeUTF("116,104,101,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0");
+            dout.writeUTF(convertToVector(word));
             dout.flush();
-
-            System.out.println("send 2nd mess");
-            String str = din.readUTF();//in.readLine();
-
-            System.out.println(str);
-
-
+            strToReturn = din.readUTF();//in.readLine();
             dout.close();
             din.close();
             socket.close();
         }
 
         catch(Exception e){
-            e.printStackTrace();
+            System.out.println("Python server not available");
+            return "exception";
         }
 
         return strToReturn;
     }
-//----------------------------------------------------------------------------------------------------------------------
+//------------------------------------ Converts string to vector -------------------------------------------------------
     private static String convertToVector(String input){
         input = input.toLowerCase();
-        String output = "[";
+        String output = "";
 
         for (int i = 0; i < 20; i++){
             try{
@@ -51,8 +54,7 @@ public class _tempFile_ {
             }
         }
         output = output.substring(0,output.length()-1);
-        output+="],";
+        output+="";
         return output;
-}
-
+    }
 }

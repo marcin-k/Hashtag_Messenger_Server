@@ -67,4 +67,18 @@ public class BaseUser  {
         this.lastName = lastName;
         this.password = password;
     }
+
+    //This is never used to save persistent storage, just to create temporary object to return object without some
+    //of the attributes
+    public BaseUser(Long id,String userName, String firstName, String lastName, String password, List<Message> messages,
+                    List<BaseUser> contacts) {
+        this.id = id;
+        this.username = userName;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.password = password;
+        this.messages = messages;
+        this.contacts = contacts;
+    }
+
 }

@@ -16,16 +16,26 @@ public class ChildUserWebservice {
     //http://localhost:8080/api/child/new?userId=2
     @PostMapping(path = "/new")
     public @ResponseBody
-    ChildUser newChildUser(@RequestBody ChildUser childUser, @RequestParam String parentId){
+    Long newChildUser(@RequestBody ChildUser childUser, @RequestParam String parentId){
         Long id = Long.parseLong(parentId);
         return childUserService.createChildUser(childUser, id);
     }
+
+    //http://localhost:8080/api/child/parentForChild?child=200&parent=1
+    @GetMapping(path = "/parentForChild")
+    public @ResponseBody
+    ChildUser addParent(@RequestParam String child, @RequestParam String parent){
+        Long childId = Long.parseLong(child);
+        Long parentId = Long.parseLong(parent);
+        return childUserService.addParent(childId, parentId);
+    }
+
 
     //update the child will be used to update any of the attributes
     //http://localhost:8080/api/child/update?childId=3
     @PostMapping(path = "/update")
     public @ResponseBody
-    ChildUser updateChildUser(@RequestBody ChildUser childUser, @RequestParam String childId){
+    String updateChildUser(@RequestBody ChildUser childUser, @RequestParam String childId){
         Long id = Long.parseLong(childId);
         return childUserService.update(childUser, id);
     }
@@ -48,6 +58,12 @@ public class ChildUserWebservice {
         return childUserService.setLimit(id, limitInt);
     }
 
-
-
+    //returns child with id
+    //http://localhost:8080/api/child/get?child=200
+    @GetMapping(path = "/get")
+    public @ResponseBody
+    ChildUser getChild(@RequestParam String child){
+        Long childId = Long.parseLong(child);
+        return childUserService.getChild(childId);
+    }
 }

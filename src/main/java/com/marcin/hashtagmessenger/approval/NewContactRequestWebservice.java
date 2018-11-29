@@ -1,6 +1,5 @@
-package com.marcin.hashtagmessenger.Approval;
+package com.marcin.hashtagmessenger.approval;
 
-import com.marcin.hashtagmessenger.message.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;

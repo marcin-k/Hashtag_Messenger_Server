@@ -1,9 +1,7 @@
-package com.marcin.hashtagmessenger.Approval;
+package com.marcin.hashtagmessenger.approval;
 
 import com.marcin.hashtagmessenger.childUser.ChildUser;
 import com.marcin.hashtagmessenger.childUser.ChildUserRepository;
-import com.marcin.hashtagmessenger.core.BaseUser;
-import com.marcin.hashtagmessenger.message.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,9 +20,11 @@ public class NewContactRequestService {
 
     //add contact rqst to request sender and recipient
     public NewContactRequest createRqst(NewContactRequest newContactRequest){
+        NewContactRequest rqst = newContactRequestRepository.save(newContactRequest);
         ChildUser childUser = childUserRepository.findById(newContactRequest.getChildRequestingNewContactId()).get();
-        childUser.addNewRqst(newContactRequest);
-        return newContactRequestRepository.save(newContactRequest);
+        childUser.addNewRqst(rqst);
+        childUserRepository.save(childUser);
+        return rqst;
     }
 
     //approves the rqst with the rqst id
