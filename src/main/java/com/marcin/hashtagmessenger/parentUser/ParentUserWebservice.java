@@ -1,5 +1,10 @@
 package com.marcin.hashtagmessenger.parentUser;
-
+/************************************************************
+ * Class used to expose webservices.
+ *
+ * author: Marcin Krzeminski
+ *         x17158851
+ * **************************************************************/
 import com.marcin.hashtagmessenger.childUser.ChildUser;
 import com.marcin.hashtagmessenger.message.Message;
 import org.springframework.beans.factory.annotation.Autowired;

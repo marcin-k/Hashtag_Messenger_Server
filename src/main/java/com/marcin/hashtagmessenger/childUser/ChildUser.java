@@ -1,12 +1,17 @@
 package com.marcin.hashtagmessenger.childUser;
-
+/************************************************************
+ * Child user model class used to define the template of a
+ * child user
+ *
+ * author: Marcin Krzeminski
+ *         x17158851
+ * **************************************************************/
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.marcin.hashtagmessenger.approval.NewContactRequest;
-import com.marcin.hashtagmessenger.core.BaseUser;
+import com.marcin.hashtagmessenger.baseUser.BaseUser;
 import com.marcin.hashtagmessenger.parentUser.ParentUser;
 import lombok.Data;
 import javax.persistence.*;
@@ -18,12 +23,13 @@ import java.util.List;
 @Entity
 @DiscriminatorValue("child")
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "childId")
-@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY, getterVisibility = JsonAutoDetect.Visibility.NONE, setterVisibility = JsonAutoDetect.Visibility.NONE)
+@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY, getterVisibility = JsonAutoDetect.Visibility.NONE,
+        setterVisibility = JsonAutoDetect.Visibility.NONE)
 public class ChildUser extends BaseUser {
 
 //-----------------------Class Variables--------------------------------------------------------------------------------
     private int childId;
-    //TODO: set up many to many
+
     @ManyToMany(fetch = FetchType.EAGER)
 //    @JsonBackReference
     private List<ParentUser> parents;
@@ -56,16 +62,29 @@ public class ChildUser extends BaseUser {
         parents.add(parentUser);
     }
 
-//-----------------------Constructor------------------------------------------------------------------------------------
+//-----------------------Constructors-----------------------------------------------------------------------------------
     protected ChildUser(){
         super();
     }
 
     public ChildUser(String userName, String firstName, String lastName, String password, List<ParentUser> parents,
+                          List<NewContactRequest> requests, boolean canAddNewContacts, boolean canBeFound,
+                          boolean canReceiveMessageFromNonConctact, int dailyAllowance) {
+
+        super(userName, firstName, lastName, password);
+        this.parents = parents;
+        this.requests = requests;
+        this.canAddNewContacts = canAddNewContacts;
+        this.canBeFound = canBeFound;
+        this.canReceiveMessageFromNonConctact = canReceiveMessageFromNonConctact;
+        this.dailyAllowance = dailyAllowance;
+    }
+
+    public ChildUser(Long id,String userName, String firstName, String lastName, String password, List<ParentUser> parents,
                      List<NewContactRequest> requests, boolean canAddNewContacts, boolean canBeFound,
                      boolean canReceiveMessageFromNonConctact, int dailyAllowance) {
 
-        super(userName, firstName, lastName, password);
+        super(id, userName, firstName, lastName, password);
         this.parents = parents;
         this.requests = requests;
         this.canAddNewContacts = canAddNewContacts;

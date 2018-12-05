@@ -1,6 +1,11 @@
 package com.marcin.hashtagmessenger.config;
-
-import com.marcin.hashtagmessenger.core.BaseUserRepository;
+/************************************************************
+ * Class used to configure the security and list of
+ * included/excluded urls
+ *
+ * author: Marcin Krzeminski
+ *         x17158851
+ * **************************************************************/
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +15,6 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 
@@ -18,26 +22,27 @@ import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private static final Logger logger = LoggerFactory.getLogger(SecurityConfig.class);
+//    private static final Logger logger = LoggerFactory.getLogger(SecurityConfig.class);
 
     @Autowired
     BaseUserDetailsService baseUserDetailsService;
 
-    //in memeory for testing puposes
+    //in memory for testing purposes
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 //        auth.inMemoryAuthentication().withUser("user1").password("{noop}user1").roles("USER");
 //        logger.info("password for user user1 is user1");
-
         auth.userDetailsService(baseUserDetailsService).passwordEncoder(passwordEncoder());
 
     }
 
+    //used to store the password in the plan text format (for debugging purposes)
     @Bean
     public static NoOpPasswordEncoder passwordEncoder() {
         return (NoOpPasswordEncoder) NoOpPasswordEncoder.getInstance();
     }
 
+    //security config with all urls added
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
@@ -48,11 +53,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and().logout()
                 .and().csrf().disable();
     }
+
     //excluded urls from security
     @Override
     public void configure(WebSecurity web) throws Exception {
         web.ignoring().antMatchers("/api/parent/new");
         web.ignoring().antMatchers("/api/contacts/pw");
         web.ignoring().antMatchers("/api/contacts/login");
+        web.ignoring().antMatchers("/api/contacts/checkLogin");
+        web.ignoring().antMatchers("/api/contacts/parentOrChild");
+        web.ignoring().antMatchers("/api/contacts/cache");
     }
 }

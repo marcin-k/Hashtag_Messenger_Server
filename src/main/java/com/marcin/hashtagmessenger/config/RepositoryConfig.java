@@ -13,7 +13,9 @@ import javax.persistence.metamodel.Type;
  * Class used to expose id attribute,
  * (by default those are not part of JSON)
  *
- **************************************************************/
+ * author: Marcin Krzeminski
+ *         x17158851
+ * **************************************************************/
 @Configuration
 public class RepositoryConfig extends RepositoryRestConfigurerAdapter {
 

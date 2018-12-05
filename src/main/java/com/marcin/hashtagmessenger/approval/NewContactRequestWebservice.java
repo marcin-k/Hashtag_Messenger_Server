@@ -1,5 +1,10 @@
 package com.marcin.hashtagmessenger.approval;
-
+/************************************************************
+ * Class used to expose webservices.
+ *
+ * author: Marcin Krzeminski
+ *         x17158851
+ * **************************************************************/
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;

@@ -1,5 +1,11 @@
 package com.marcin.hashtagmessenger.childUser;
-
+/************************************************************
+ * Class used to expose webservices.
+ *
+ * author: Marcin Krzeminski
+ *         x17158851
+ * **************************************************************/
+import org.omg.Messaging.SYNC_WITH_TRANSPORT;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -21,6 +27,7 @@ public class ChildUserWebservice {
         return childUserService.createChildUser(childUser, id);
     }
 
+    //used to add a parent for a child with id
     //http://localhost:8080/api/child/parentForChild?child=200&parent=1
     @GetMapping(path = "/parentForChild")
     public @ResponseBody
@@ -63,6 +70,7 @@ public class ChildUserWebservice {
     @GetMapping(path = "/get")
     public @ResponseBody
     ChildUser getChild(@RequestParam String child){
+//        System.out.println("id"+child);
         Long childId = Long.parseLong(child);
         return childUserService.getChild(childId);
     }

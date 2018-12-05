@@ -1,10 +1,18 @@
 package com.marcin.hashtagmessenger.pythonServerConnection;
-
+/************************************************************
+ * Connector class is used establish TCP/IP connection with the
+ * python server, consist of method used to convert a string
+ * into a vector. Singleton design controller.
+ *
+ * author: Marcin Krzeminski
+ *         x17158851
+ * **************************************************************/
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.net.Socket;
 
 public class Connector {
+    //singleton construct
     private static Connector ourInstance = new Connector();
 
     public static Connector getInstance() {
@@ -14,8 +22,7 @@ public class Connector {
     private Connector() {
     }
 
-
-
+//-------------------- method to contact the python server using the socket --------------------------------------------
     public String checkWord(String word){
 
         String strToReturn = "";

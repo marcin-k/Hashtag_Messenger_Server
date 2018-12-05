@@ -1,8 +1,10 @@
-package com.marcin.hashtagmessenger.core;
-
-import com.marcin.hashtagmessenger.childUser.ChildUser;
-import com.marcin.hashtagmessenger.message.Message;
-import com.marcin.hashtagmessenger.message.MessageService;
+package com.marcin.hashtagmessenger.baseUser;
+/************************************************************
+ * Class used to expose webservices.
+ *
+ * author: Marcin Krzeminski
+ *         x17158851
+ * **************************************************************/
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -64,5 +66,31 @@ public class BaseUserWebservice {
     public @ResponseBody
     List<BaseUser> login(@RequestParam String username){
         return baseUserService.search(username);
+    }
+
+    //returns 7 if free 0 if not
+    //http://localhost:8080/api/contacts/checkLogin?username=user1
+    @GetMapping(path = "/checkLogin")
+    public @ResponseBody
+    int checkLogin(@RequestParam String username){
+        return baseUserService.checkLogin(username);
+    }
+
+    //returns 5 if its a parent 0 if child
+    //http://localhost:8080/api/contacts/parentOrChild?id=1
+    @GetMapping(path = "/parentOrChild")
+    public @ResponseBody
+    int parentOrChild(@RequestParam String id){
+        Long idL = Long.parseLong(id);
+        return baseUserService.parentOrChild(idL);
+    }
+
+    //returns string containing users id and first names (for performance improvement
+    // that is cached on the client, so doesn't have to look up every time)
+    //http://localhost:8080/api/contacts/cache
+    @GetMapping(path = "/cache")
+    public @ResponseBody
+    String cache(){
+        return baseUserService.cache();
     }
 }

@@ -1,6 +1,13 @@
-package com.marcin.hashtagmessenger.core;
-
+package com.marcin.hashtagmessenger.baseUser;
+/************************************************************
+ * Service class used to define the implementation of the methods
+ * invoked in the webservice
+ *
+ * author: Marcin Krzeminski
+ *         x17158851
+ * **************************************************************/
 import com.marcin.hashtagmessenger.childUser.ChildUser;
+import com.marcin.hashtagmessenger.parentUser.ParentUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -82,9 +89,45 @@ public class BaseUserService {
                     newList.add(new BaseUser(b.getId(),b.getUsername(), b.getFirstName(), b.getLastName(), "",
                             b.getMessages(), b.getContacts()));
                 }
-//                newList.add(b);
+//                newList.add(new BaseUser(b.getId(),b.getUsername(), b.getFirstName(), b.getLastName(), "",
+//                            b.getMessages(), b.getContacts()));
             }
         }
         return newList;
+    }
+
+    //checks if the login is already used by other user
+    public int checkLogin(String username){
+        List<BaseUser> allUsers = new ArrayList<>();
+        baseUserRepository.findAll().forEach(allUsers::add);
+        for (BaseUser b : allUsers){
+            if(b.getUsername().equalsIgnoreCase(username)){
+                return 0;
+            }
+        }
+        return 7;
+    }
+
+    //checks if the id belongs to parent of child, returns 5 for parent 0 for child
+    public int parentOrChild(Long id){
+        BaseUser bs = baseUserRepository.findById(id).get();
+        if (bs instanceof ParentUser){
+            return 5;
+        }
+        else {
+            return 0;
+        }
+    }
+
+    //returns a comma separated list of users ids and their firs names
+    public String cache(){
+        String toReturn = "";
+        Iterable<BaseUser> iter = baseUserRepository.findAll();
+        List<BaseUser> allUsers = new ArrayList<>();
+        iter.forEach(allUsers::add);
+        for (BaseUser b : allUsers){
+            toReturn += b.getId()+","+b.getFirstName()+",";
+        }
+        return toReturn.substring(0, toReturn.length() - 1) ;
     }
 }

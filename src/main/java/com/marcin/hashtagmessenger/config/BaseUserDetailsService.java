@@ -1,9 +1,14 @@
 package com.marcin.hashtagmessenger.config;
-
-import com.marcin.hashtagmessenger.core.BaseUser;
-import com.marcin.hashtagmessenger.core.BaseUserRepository;
+/************************************************************
+ * Class used by Security config for login purposes gathers
+ * username and password attribute to validate the login process
+ *
+ * author: Marcin Krzeminski
+ *         x17158851
+ * **************************************************************/
+import com.marcin.hashtagmessenger.baseUser.BaseUser;
+import com.marcin.hashtagmessenger.baseUser.BaseUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

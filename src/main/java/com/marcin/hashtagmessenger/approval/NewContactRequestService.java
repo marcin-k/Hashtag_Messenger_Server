@@ -8,7 +8,13 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-
+/************************************************************
+ * Service class used to define the implementation of the methods
+ * invoked in the webservice
+ *
+ * author: Marcin Krzeminski
+ *         x17158851
+ * **************************************************************/
 @Service
 public class NewContactRequestService {
 
@@ -35,6 +41,7 @@ public class NewContactRequestService {
         return newContactRequestRepository.save(rqst);
     }
 
+    //returns list of requests created by a child with id
     public List<NewContactRequest> read(Long id){
         ChildUser childUser = childUserRepository.findById(id).get();
         if (childUser!=null) {

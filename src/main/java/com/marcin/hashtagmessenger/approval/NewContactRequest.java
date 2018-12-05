@@ -1,5 +1,11 @@
 package com.marcin.hashtagmessenger.approval;
-
+/************************************************************
+ * NewContactRequest model class used to define the template of a
+ * NewContactRequest
+ *
+ * author: Marcin Krzeminski
+ *         x17158851
+ * **************************************************************/
 import lombok.Data;
 
 import javax.persistence.Entity;

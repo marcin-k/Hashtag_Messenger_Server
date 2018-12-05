@@ -1,4 +1,4 @@
-package com.marcin.hashtagmessenger.core;
+package com.marcin.hashtagmessenger.baseUser;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.marcin.hashtagmessenger.message.Message;
@@ -9,13 +9,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 /***********************************************************************************************************************
+ *   Base user template utilised by child and parent users, consist of share attributes and methods
+ *
+ *
  *   Single Table Inheritance concept taken from:
  *   https://www.thoughts-on-java.org/complete-guide-inheritance-strategies-jpa-hibernate/
  *   Used to allow inheritance when using hibernate design pattern
  *
- *   Non Of the subclass attributes can be null!!!
+ *   Non Of the subclass attributes can be null!
  *
- **********************************************************************************************************************/
+ * author: Marcin Krzeminski
+ *         x17158851
+ * **************************************************************/
 @Data
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
@@ -79,6 +84,15 @@ public class BaseUser  {
         this.password = password;
         this.messages = messages;
         this.contacts = contacts;
+    }
+    //This is never used to save persistent storage, just to create temporary object to return object without some
+    //of the attributes
+    public BaseUser(Long id,String userName, String firstName, String lastName, String password) {
+        this.id = id;
+        this.username = userName;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.password = password;
     }
 
 }

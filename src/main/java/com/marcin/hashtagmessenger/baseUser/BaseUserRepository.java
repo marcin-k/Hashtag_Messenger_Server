@@ -1,5 +1,4 @@
-package com.marcin.hashtagmessenger.parentUser;
-
+package com.marcin.hashtagmessenger.baseUser;
 /************************************************************
  * Interface used to expose the Create, Read, Update and
  * Delete methods on the object
@@ -8,8 +7,9 @@ package com.marcin.hashtagmessenger.parentUser;
  *         x17158851
  * **************************************************************/
 import org.springframework.data.repository.CrudRepository;
-import org.springframework.data.rest.core.annotation.RepositoryRestResource;
+import org.springframework.stereotype.Service;
 
-@RepositoryRestResource(exported = true)
-public interface ParentUserRepository extends CrudRepository<ParentUser, Long> {
+@Service
+public interface BaseUserRepository extends CrudRepository<BaseUser, Long> {
+    BaseUser findByUsername(String username);
 }

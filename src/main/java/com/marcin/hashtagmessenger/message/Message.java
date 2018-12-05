@@ -1,5 +1,11 @@
 package com.marcin.hashtagmessenger.message;
-
+/************************************************************
+ * Message model class used to define the template of a
+ * message
+ *
+ * author: Marcin Krzeminski
+ *         x17158851
+ * **************************************************************/
 import lombok.Data;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

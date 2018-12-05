@@ -2,11 +2,19 @@ package com.marcin.hashtagmessenger.parentUser;
 
 import com.fasterxml.jackson.annotation.*;
 import com.marcin.hashtagmessenger.childUser.ChildUser;
-import com.marcin.hashtagmessenger.core.BaseUser;
+import com.marcin.hashtagmessenger.baseUser.BaseUser;
 import lombok.Data;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+
+/************************************************************
+ * Parent user model class used to define the template of a
+ * parent user
+ *
+ * author: Marcin Krzeminski
+ *         x17158851
+ * **************************************************************/
 
 @Data
 @Entity
@@ -17,7 +25,7 @@ public class ParentUser extends BaseUser {
 //-----------------------Class Variables--------------------------------------------------------------------------------
     private int parId;
     private String emailAddress;
-//TODO: set up many to many relationships
+
     @ManyToMany(fetch = FetchType.EAGER)
 //    @JsonManagedReference
     private List<ChildUser> children;
