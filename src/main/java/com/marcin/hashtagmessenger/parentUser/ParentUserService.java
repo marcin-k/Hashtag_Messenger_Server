@@ -21,7 +21,9 @@ public class ParentUserService {
 
     //used to create a new parent user object
     public ParentUser createParentUser(ParentUser parentUser){
-        return parentUserRepository.save(parentUser);
+        ParentUser p = parentUser;
+        p.setPassword("abc123");
+        return parentUserRepository.save(p);
     }
 
     //used to return list of children for a parent with a given id

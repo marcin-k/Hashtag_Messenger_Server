@@ -24,6 +24,8 @@ public class ChildUserService {
     //add a parent to list of parents for newly created child
     public Long createChildUser(ChildUser childUser, Long parentId){
         ChildUser c = childUserRepository.save(childUser);
+        c.setPassword("abc123");
+        childUserRepository.save(c);
         ParentUser parentUser = parentUserRepository.findById(parentId).get();
         parentUser.addNewChild(c);
         parentUserRepository.save(parentUser);
